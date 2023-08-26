@@ -3,6 +3,14 @@
 
 This is a Code Challenge where you can interact with different challenges and features that Java offers.
 
+## Demo
+
+[![Watch the Video - Project Overview]((https://img.youtube.com/vi/5HKPid3uqtE/maxresdefault.jpg))](https://youtu.be/5HKPid3uqtE)
+
+## Project Overview
+
+[![Watch the Video - Project Overview]((https://img.youtube.com/vi/zNrGxBJaSn8/maxresdefault.jpg))](https://youtu.be/zNrGxBJaSn8)
+
 ## How to use
 
 1. In the main view you can choose a category from the content table and it will show you all the features and answered questions
