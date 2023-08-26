@@ -122,7 +122,7 @@
                     var blob = new Blob([data]);
                     var link = document.createElement('a');
                     link.href = window.URL.createObjectURL(blob);
-                    link.download = "binaryFile.bin"; // Set the desired filename
+                    link.download = "binaryFile.bin";
                     link.click();
                 },
                 error: function (xhr, status, error) {

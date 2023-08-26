@@ -12,7 +12,7 @@ public class CollectionsService implements ICollectionsService {
 	public static final String LINE_BREAK = "\n";
 
 	@Override
-	public String sortArray(List<String> inputList) throws CollectionsException {
+	public String sortArray(final List<String> inputList) throws CollectionsException {
 		try {
 			final List<String> sortedList = new ArrayList<>(inputList);
 			final List<String> sortingSteps = new ArrayList<>();
@@ -24,7 +24,6 @@ public class CollectionsService implements ICollectionsService {
 				swapped = false;
 				for(int j = 0; j < n - i - 1; j++) {
 					if(sortedList.get(j).compareTo(sortedList.get(j + 1)) > 0) {
-						// Swap elements
 						String temp = sortedList.get(j);
 						sortedList.set(j, sortedList.get(j + 1));
 						sortedList.set(j + 1, temp);
@@ -32,7 +31,7 @@ public class CollectionsService implements ICollectionsService {
 					}
 				}
 				if(!swapped) {
-					break; // No swaps were made, the array is sorted
+					break;
 				}
 				sortingSteps.add("Step " + (sortingSteps.size() + 1) + ": " + sortedList);
 			}
@@ -45,13 +44,13 @@ public class CollectionsService implements ICollectionsService {
 
 
 	@Override
-	public String checkArrays(List<String> array1,
-	                          List<String> array2) throws CollectionsException {
+	public String checkArrays(final List<String> array1,
+	                          final List<String> array2) throws CollectionsException {
 		try {
 			if(array1.equals(array2)) {
 				return "Arrays are equal.";
 			} else {
-				int minLength = Math.min(array1.size(), array2.size());
+				final int minLength = Math.min(array1.size(), array2.size());
 				for(int i = 0; i < minLength; i++) {
 					if(!array1.get(i).equals(array2.get(i))) {
 						return "Arrays are different at index " + i + ": " + array1.get(i) + " != " + array2.get(i);
