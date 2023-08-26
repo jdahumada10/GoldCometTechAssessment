@@ -11,9 +11,9 @@ public class EmployeeDto {
 	private Long id;
 	private String firstName;
 	private String lastName;
-	@CsvDate("dd/MM/yy")
+	@CsvDate("yyyy-MM-dd")
 	private Date dateCreated;
-	@CsvDate("dd/MM/yy")
+	@CsvDate("yyyy-MM-dd")
 	private Date dateHired;
 	private Double salary;
 }
