@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java - Gold Comet</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="text-center">Java - Gold Comet</h1>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <h2>Table of Contents</h2>
+            <div class="list-group">
+                <a href="dateTime" class="list-group-item list-group-item-action">Date and Time</a>
+                <a href="numbers" class="list-group-item list-group-item-action">Numbers</a>
+                <a href="objects" class="list-group-item list-group-item-action">Objects</a>
+                <a href="strings" class="list-group-item list-group-item-action">Strings</a>
+                <a href="io" class="list-group-item list-group-item-action">I/O</a>
+                <a href="collections" class="list-group-item list-group-item-action">Collections and Data Structures</a>
+                <a href="encryption" class="list-group-item list-group-item-action">Encryption</a>
+                <a href="mySqlDatabaseWiki" class="list-group-item list-group-item-action">MYSQL Database</a>
+                <a href="jBossWiki" class="list-group-item list-group-item-action">Web Server JBOSS EAP 7.2</a>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <!-- Placeholder content for demonstration -->
+            <div id="content-placeholder" class="jumbotron">
+                <h2 class="display-4">Welcome to Java - Gold Comet</h2>
+                <p class="lead">Select a topic from the table of contents to learn more.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".list-group-item").click(function (e) {
+            e.preventDefault();
+            var endpoint = $(this).attr("href");
+            $("#content-placeholder").load(endpoint);
+        });
+    });
+</script>
+</body>
+</html>

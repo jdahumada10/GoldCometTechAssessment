@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java Examples</title>
+</head>
+<body>
+<div class="container mt-4">
+  <h2 class="text-center">JBoss Wiki</h2>
+  <ol>
+    <li>
+      <p th:text="${jBossQuestion1}"></p>
+      <form th:action="@{/jBossWiki/question1Response}" method="GET">
+        <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+        <label th:if="${jBossQuestion1Response != null}" class="mt-2">Result:
+          <p th:text="${jBossQuestion1Response}" style="white-space: pre-line;"></p>
+        </label>
+      </form>
+    </li>
+
+    <li>
+      <p th:text="${jBossQuestion2}"></p>
+      <form th:action="@{/jBossWiki/question2Response}" method="GET">
+        <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+        <label th:if="${jBossQuestion2Response != null}" class="mt-2">Result:
+          <p th:text="${jBossQuestion2Response}" style="white-space: pre-line;"></p>
+        </label>
+      </form>
+    </li>
+
+    <li>
+      <p th:text="${jBossQuestion3}"></p>
+      <form th:action="@{/jBossWiki/question3Response}" method="GET">
+        <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+        <label th:if="${jBossQuestion3Response != null}" class="mt-2">Result:
+          <p th:text="${jBossQuestion3Response}" style="white-space: pre-line;"></p>
+        </label>
+      </form>
+    </li>
+
+    <li>
+      <p th:text="${jBossQuestion4}"></p>
+      <form th:action="@{/jBossWiki/question4Response}" method="GET">
+        <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+        <label th:if="${jBossQuestion4Response != null}" class="mt-2">Result:
+          <p th:text="${jBossQuestion4Response}" style="white-space: pre-line;"></p>
+        </label>
+      </form>
+    </li>
+  </ol>
+</div>
+<script>
+  $(document).ready(function () {
+    $("form").submit(function (e) {
+      e.preventDefault();
+      let form = $(this);
+      let url = form.attr("action");
+      let method = form.attr("method");
+      let formData = form.serialize();
+
+      $.ajax({
+        url: url,
+        type: method,
+        data: formData,
+        success: function (response) {
+          $("#content-placeholder").html(response);
+        },
+        error: function (xhr, status, error) {
+          console.log("Error:", error);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

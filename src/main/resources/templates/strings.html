@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>String Operations</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">String Operations</h2>
+    <ol>
+        <li>
+            <p>Write a program that counts duplicate characters from a given string.</p>
+            <form th:action="@{/strings/countsDuplicateCharacters}" method="POST">
+                <div class="mb-3">
+                    <label for="givenString" class="form-label">Enter String:</label>
+                    <input type="text" id="givenString" name="givenString" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Count Duplicates</button>
+                <label th:if="${duplicateCharactersResult != null}" class="mt-2">Result:
+                    <p th:text="${duplicateCharactersResult}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p>Write a program that returns the first non-repeating character from a given string.</p>
+            <form th:action="@{/strings/firstNonRepeatingCharacter}" method="POST">
+                <div class="mb-3">
+                    <label for="inputStringNonRepeat" class="form-label">Enter String:</label>
+                    <input type="text" id="inputStringNonRepeat" name="inputStringNonRepeat" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Find First Non-Repeating</button>
+                <label th:if="${firstNonRepeating != null}" class="mt-2">Result:
+                    <p th:text="${firstNonRepeating}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p>Write a program that determines whether the given string is a palindrome or not.</p>
+            <form th:action="@{/strings/checkPalindrome}" method="POST">
+                <div class="mb-3">
+                    <label for="inputStringPalindrome" class="form-label">Enter String:</label>
+                    <input type="text" id="inputStringPalindrome" name="inputStringPalindrome" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Check Palindrome</button>
+                <label th:if="${isPalindrome != null}" class="mt-2">Result:
+                    <p th:text="${isPalindrome}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p>Write a program that joins the given strings by the given delimiter.</p>
+            <form th:action="@{/strings/joinWithDelimiter}" method="POST">
+                <div class="mb-3">
+                    <label for="inputStringsToJoin" class="form-label">Enter Strings (comma-separated):</label>
+                    <input type="text" id="inputStringsToJoin" name="inputStringsToJoin" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="delimiter" class="form-label">Enter Delimiter:</label>
+                    <input type="text" id="delimiter" name="delimiter" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Join Strings</button>
+                <label th:if="${joinedString != null}" class="mt-2">Result:
+                    <p th:text="${joinedString}"></p>
+                </label>
+            </form>
+        </li>
+    </ol>
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var method = form.attr("method");
+            var formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

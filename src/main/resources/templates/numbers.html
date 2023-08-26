@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Numbers</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">Numbers</h2>
+    <ol>
+        <li>
+            <p>Write a program that returns the min and max of 2 numbers.</p>
+            <form th:action="@{/numbers/findMinMax}" method="POST">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="number1" class="form-label">Number 1:</label>
+                        <input type="number" step="0.01" id="number1" name="firstNumber" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="number2" class="form-label">Number 2:</label>
+                        <input type="number" step="0.01" id="number2" name="secondNumber" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mt-2">Find Min/Max</button>
+                    </div>
+                    <div class="col" th:if="${minNumber != null}">
+                        <label class="mt-2">Min Number:</label>
+                        <p th:text="${minNumber}"></p>
+                    </div>
+                    <div class="col" th:if="${maxNumber != null}">
+                        <label class="mt-2">Max Number:</label>
+                        <p th:text="${maxNumber}"></p>
+                    </div>
+                </div>
+            </form>
+        </li>
+
+        <li>
+            <p>Write a program that multiplies two large int/long values and throws an arithmetic exception in the case
+                of an operation overflow.</p>
+            <form th:action="@{/numbers/multiply}" method="POST">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="largeNumber1" class="form-label">Number 1:</label>
+                        <input type="text" step="1" id="largeNumber1" name="firstNumber" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="largeNumber2" class="form-label">Number 2:</label>
+                        <input type="text" step="1" id="largeNumber2" name="secondNumber" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mt-2">Multiply</button>
+                    </div>
+                    <div class="col" th:if="${multiplyResult != null}">
+                        <label class="mt-2">Result:</label>
+                        <p th:text="${multiplyResult}"></p>
+                    </div>
+                </div>
+            </form>
+        </li>
+
+        <li>
+            <p>Write a program that takes three float/double values (a,b,c) and computes a*b+c in an efficient way.</p>
+            <form th:action="@{/numbers/computeValues}" method="POST">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="floatValueA" class="form-label">Number A:</label>
+                        <input type="number" step="0.0001" id="floatValueA" name="numberA" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="floatValueB" class="form-label">Number B:</label>
+                        <input type="number" step="0.0001" id="floatValueB" name="numberB" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label for="floatValueC" class="form-label">Number C:</label>
+                        <input type="number" step="0.0001" id="floatValueC" name="numberC" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mt-2">Calculate</button>
+                    </div>
+                    <div class="col" th:if="${computeValuesResult != null}">
+                        <label class="mt-2">Result:</label>
+                        <p th:text="${computeValuesResult}"></p>
+                    </div>
+                </div>
+            </form>
+        </li>
+    </ol>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var method = form.attr("method");
+            var formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

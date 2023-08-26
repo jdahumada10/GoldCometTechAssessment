@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Java Examples</title>
+</head>
+<body>
+<div class="container mt-4">
+  <h2 class="text-center">Collection Operations</h2>
+  <ol>
+    <li>
+      <p>Exemplify a sorting algorithm for an array of objects.</p>
+      <form th:action="@{/collections/sortArray}" method="POST">
+        <div class="mb-3">
+          <label for="objectArrayInput" class="form-label">Enter Array (comma-separated):</label>
+          <input type="text" id="objectArrayInput" name="objectArrayInput" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Sort Array</button>
+        <label th:if="${sortedArrayResult != null}" class="mt-2">Result:
+          <p th:text="${sortedArrayResult}" style="white-space: pre-line;"></p>
+        </label>
+      </form>
+    </li>
+
+    <li>
+      <p>Check whether two given arrays are equal or if there is a mismatch.</p>
+      <form th:action="@{/collections/checkArrays}" method="POST">
+        <div class="mb-3">
+          <label for="array1Input" class="form-label">Enter Array 1 (comma-separated):</label>
+          <input type="text" id="array1Input" name="array1Input" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="array2Input" class="form-label">Enter Array 2 (comma-separated):</label>
+          <input type="text" id="array2Input" name="array2Input" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Check Arrays</button>
+        <label th:if="${arrayComparisonResult != null}" class="mt-2">Result:
+          <p th:text="${arrayComparisonResult}"></p>
+        </label>
+      </form>
+    </li>
+  </ol>
+</div>
+<script>
+  $(document).ready(function () {
+    $("form").submit(function (e) {
+      e.preventDefault();
+      var form = $(this);
+      var url = form.attr("action");
+      var method = form.attr("method");
+      var formData = form.serialize();
+
+      $.ajax({
+        url: url,
+        type: method,
+        data: formData,
+        success: function (response) {
+          $("#content-placeholder").html(response);
+        },
+        error: function (xhr, status, error) {
+          console.log("Error:", error);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>

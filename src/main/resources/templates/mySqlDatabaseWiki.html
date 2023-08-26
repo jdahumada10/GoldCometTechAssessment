@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java Examples</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">MySQL Wiki</h2>
+    <ol>
+        <li>
+            <p th:text="${dbQuestion1}"></p>
+            <form th:action="@{/mySqlDatabaseWiki/query1}" method="GET">
+                <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+                <label th:if="${dbQuestion1Response != null}" class="mt-2">Result:
+                    <p th:text="${dbQuestion1Response}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p th:text="${dbQuestion2}"></p>
+            <form th:action="@{/mySqlDatabaseWiki/query2}" method="GET">
+                <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+                <label th:if="${dbQuestion2Response != null}" class="mt-2">Result:
+                    <p th:text="${dbQuestion2Response}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p th:text="${dbQuestion3}"></p>
+            <form th:action="@{/mySqlDatabaseWiki/query3}" method="GET">
+                <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+                <label th:if="${dbQuestion3Response != null}" class="mt-2">Result:
+                    <p style="white-space: pre-line;" th:text="${dbQuestion3Response}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p th:text="${dbQuestion4}"></p>
+            <form th:action="@{/mySqlDatabaseWiki/query4}" method="GET">
+                <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+                <label th:if="${dbQuestion4Response != null}" class="mt-2">Result:
+                    <p th:text="${dbQuestion4Response}"></p>
+                </label>
+            </form>
+        </li>
+
+        <li>
+            <p th:text="${dbQuestion5}"></p>
+            <form th:action="@{/mySqlDatabaseWiki/query5}" method="GET">
+                <button type="submit" class="btn btn-primary mt-2">Get Response</button>
+                <label th:if="${dbQuestion5Response != null}" class="mt-2">Result:
+                    <p th:text="${dbQuestion5Response}"></p>
+                </label>
+            </form>
+        </li>
+    </ol>
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

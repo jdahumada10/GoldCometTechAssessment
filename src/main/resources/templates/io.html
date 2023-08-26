@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java Examples</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">File Operations</h2>
+    <ol>
+        <li>
+            <p>Stream the content of a given text file.</p>
+            <form id="q1Form" th:action="@{/io/streamTextFile}" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="textFileInput" class="form-label">Select a .txt File:</label>
+                    <input type="file" id="textFileInput" name="file" accept=".txt" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Stream File Content</button>
+                <label th:if="${streamedText != null}" class="mt-2">Streamed Content:</label>
+                <pre th:if="${streamedText != null}" th:text="${streamedText}"></pre>
+            </form>
+        </li>
+
+        <li>
+            <p>Read and write a binary file.</p>
+            <form id="q21Form" th:action="@{/io/readBinaryFile}" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="binaryFileInput" class="form-label">Select a Binary File:</label>
+                    <input type="file" id="binaryFileInput" name="fileQ21" accept=".bin" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Read Binary File</button>
+                <label th:if="${binaryContent != null}" class="mt-2">Read Binary Content:</label>
+                <pre th:if="${binaryContent != null}" th:text="${binaryContent}"></pre>
+            </form>
+
+            <h4 class="mt-4">Convert Text to Binary and Download</h4>
+            <form id="q22Form" th:action="@{/io/writeBinaryFileFromText}" method="POST">
+                <div class="mb-3">
+                    <label for="textToConvert" class="form-label">Enter Text:</label>
+                    <textarea id="textToConvert" name="text" rows="4" cols="50" class="form-control"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Convert and Download</button>
+            </form>
+        </li>
+
+        <li>
+            <p>Read a JSON/CSV file as an object (POJO).</p>
+            <form id="q3Form" th:action="@{/io/readJsonCsvAsPojo}" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="jsonCsvFileInput" class="form-label">Select a JSON/CSV File:</label>
+                    <input type="file" id="jsonCsvFileInput" name="fileQ3" accept=".json,.csv" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Read File as POJO</button>
+                <label th:if="${pojoResult != null}" class="mt-2">POJO Result:</label>
+                <pre th:if="${pojoResult != null}" th:text="${pojoResult}"></pre>
+            </form>
+        </li>
+    </ol>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#q1Form").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formDataChanged = new FormData();
+            formDataChanged.append("file", $("input[name=file]")[0].files[0]);
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formDataChanged,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+
+        $("#q21Form").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formDataQ21 = new FormData();
+            formDataQ21.append("file", $("input[name=fileQ21]")[0].files[0]);
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formDataQ21,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+
+        $("#q22form").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                xhrFields: {
+                    responseType: 'arraybuffer'
+                },
+                success: function (data) {
+                    var blob = new Blob([data]);
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "binaryFile.bin"; // Set the desired filename
+                    link.click();
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+
+        $("#q3Form").submit(function (e) {
+            e.preventDefault();
+            console.log("q3form");
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formDataChanged = new FormData();
+            formDataChanged.append("file", $("input[name=fileQ3]")[0].files[0]);
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formDataChanged,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

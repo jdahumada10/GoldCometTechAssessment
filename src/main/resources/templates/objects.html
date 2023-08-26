@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Objects</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">Objects</h2>
+    <ol>
+        <li>
+            <p>Write a program that performs the null checks on the given references and throws NullPointerException
+                with custom messages.</p>
+            <p>The following class will be used as the reference object. You can enter in the text box a JSON
+                string.</p>
+            <pre>
+public class EmployeeDto {
+    private Long id;
+    private String firstName;
+    private String lastName;
+    private Date dateCreated;
+    private Date dateHired;
+    private Double salary;
+}
+    </pre>
+            <p>Ex. { "id": 123, "firstName": "Juan", "lastName": "Ahumada", "dateCreated": "2023-08-25T12:00:00Z",
+                "dateHired": "2023-08-20T10:30:00Z", "salary": 90000.0 }</p>
+            <form th:action="@{/objects/performNullCheck}" method="POST">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="reference" class="form-label">JSON:</label>
+                        <input type="text" id="reference" name="jsonObject" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mt-2">Perform Null Check</button>
+                    </div>
+                    <div class="col" th:if="${nullCheckResult != null}">
+                        <label class="mt-2">Result:</label>
+                        <p th:text="${nullCheckResult}"></p>
+                    </div>
+                </div>
+            </form>
+        </li>
+
+        <li>
+            <p>Explain what an Immutable object is in Java.</p>
+            <div class="mb-3">
+                <p>An immutable object is an object whose state (data) cannot be changed after it is created. Once an
+                    immutable object is constructed, its internal data remains constant for the entire lifetime of the
+                    object. This means that you cannot modify the values of its fields or properties after creation.</p>
+            </div>
+        </li>
+
+        <li>
+            <p>Write a snippet of code exemplifying the switch statement with multiple case labels.</p>
+            <form th:action="@{/objects/switchExample}" method="POST">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label for="case1" class="form-label">Cases (comma-separated):</label>
+                        <input type="text" id="case1" name="cases" class="form-control">
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary mt-2">Evaluate Switch</button>
+                    </div>
+                    <div class="col" th:if="${switchResult != null}">
+                        <label class="mt-2">Result:</label>
+                        <p th:text="${switchResult}" style="white-space: pre-line;"></p>
+                    </div>
+                </div>
+            </form>
+        </li>
+    </ol>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            var form = $(this);
+            var url = form.attr("action");
+            var method = form.attr("method");
+            var formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

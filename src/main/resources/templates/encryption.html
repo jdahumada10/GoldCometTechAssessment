@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Java Examples</title>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center">RSA Encryption and Decryption</h2>
+    <ol>
+        <li>
+            <p>Create an RSA Keypair (Public/Private keys) using 4096 bits.</p>
+            <form th:action="@{/encryption/generateRSAKeyPair}" method="POST">
+                <button type="submit" class="btn btn-primary">Generate RSA Key Pair</button>
+            </form>
+            <label th:if="${publicKey != null}" class="mt-2">Public Key:</label>
+            <pre th:if="${publicKey != null}" th:text="${publicKey}"></pre>
+            <label th:if="${privateKey != null}" class="mt-2">Private Key:</label>
+            <pre th:if="${privateKey != null}" th:text="${privateKey}"></pre>
+        </li>
+
+        <li>
+            <p>Exemplify encrypting a data object with an RSA public key and decrypting with a private key.</p>
+            <p><strong>Encrypting with RSA</strong></p>
+            <form th:action="@{/encryption/encryptRSA}" method="POST">
+                <div class="mb-3">
+                    <label for="publicKey" class="form-label">Public Key:</label>
+                    <textarea id="publicKey" name="publicKey" rows="4" cols="50" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="textToEncrypt" class="form-label">Text to Encrypt:</label>
+                    <input type="text" id="textToEncrypt" name="textToEncrypt" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Encrypt</button>
+                <label th:if="${encryptedText != null}" class="mt-2">Encrypted Text:</label>
+                <pre th:if="${encryptedText != null}" th:text="${encryptedText}"></pre>
+            </form>
+
+            <form th:action="@{/encryption/decryptRSA}" method="POST">
+                <div class="mb-3">
+                    <label for="privateKey" class="form-label">Private Key:</label>
+                    <textarea id="privateKey" name="privateKey" rows="4" cols="50" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="textToEncrypt" class="form-label">Text to Decrypt:</label>
+                    <input type="text" id="textToDecrypt" name="textToDecrypt" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Decrypt</button>
+                <label th:if="${decryptedText != null}" class="mt-2">Decrypted Text:</label>
+                <pre th:if="${decryptedText != null}" th:text="${decryptedText}"></pre>
+            </form>
+        </li>
+    </ol>
+</div>
+<script>
+    $(document).ready(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            let form = $(this);
+            let url = form.attr("action");
+            let method = form.attr("method");
+            let formData = form.serialize();
+
+            $.ajax({
+                url: url,
+                type: method,
+                data: formData,
+                success: function (response) {
+                    $("#content-placeholder").html(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error:", error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
