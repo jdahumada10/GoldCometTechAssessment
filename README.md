@@ -5,7 +5,7 @@ This is a Code Challenge where you can interact with different challenges and fe
 
 ## Demo
 
-[![Watch the Video - Project Overview]((https://img.youtube.com/vi/5HKPid3uqtE/maxresdefault.jpg))](https://youtu.be/5HKPid3uqtE)
+[![Watch the Video - DEMO]((https://img.youtube.com/vi/5HKPid3uqtE/maxresdefault.jpg))](https://youtu.be/5HKPid3uqtE)
 
 ## Project Overview
 
