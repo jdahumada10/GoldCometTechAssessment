@@ -1,5 +1,5 @@
-# gold-comet-tech-assessment
-# Introduction
+# Gold Comet Tech Assessment
+## Introduction
 
 This is a Code Challenge where you can interact with different challenges and features that Java offers.
 
